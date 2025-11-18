@@ -25,8 +25,9 @@ function getLength(value: string | any[]): number {
   }
 }
 
-// console.log(getLength("typescript"));
-// console.log(getLength([]));
+console.log(getLength("typescript"));
+console.log(getLength([10, 20, 30, 40]));
+console.log(getLength([]));
 
 // *problem 3
 
@@ -39,7 +40,7 @@ class Person {
     this.age = age;
   }
   getDetails(): string {
-    return `"Name: ${this.name}, Age: ${this.age}"`;
+    return `'Name: ${this.name}, Age: ${this.age}'`;
   }
 }
 
@@ -66,8 +67,7 @@ const books = [
   { title: "Book C", rating: 5.0 },
 ];
 
-console.log(filterByRating(books));
-// filterByRating(books);
+// console.log(filterByRating(books));
 
 // * Problem 5
 // &
@@ -103,7 +103,7 @@ const users = [
   { id: 3, name: "Rumi", email: "rumi@example.com", isActive: true },
 ];
 
-console.log(filterActiveUsers(users));
+// console.log(filterActiveUsers(users));
 
 // * Problem 6
 
@@ -128,11 +128,41 @@ const myBook: Book = {
   isAvailable: true,
 };
 
-// printBookDetails(myBook);
+printBookDetails(myBook);
 
 // * Problem 7
 
-//  to do
+function getUniqueValues(
+  arr1: (string | number)[],
+  arr2: (string | number)[]
+): (string | number)[] {
+  const result: (string | number)[] = [];
+  const combined: (string | number)[] = [...arr1, ...arr2];
+
+  for (let i = 0; i < combined.length; i++) {
+    const value = combined[i];
+    if (value === undefined) continue;
+
+    let exists = false;
+
+    for (let j = 0; j < result.length; j++) {
+      if (result[j] === value) {
+        exists = true;
+        break;
+      }
+    }
+
+    if (!exists) {
+      result[result.length] = value;
+    }
+  }
+
+  return result;
+}
+
+const array1 = [1, 2, 3, 4, 5];
+const array2 = [3, 4, 5, 6, 7];
+console.log(getUniqueValues(array1, array2));
 
 // * Problem 8
 
@@ -149,7 +179,15 @@ function calculateTotalPrice(products: Product[]): number {
   if (products.length === 0) return 0;
 
   return products
-    .map((product) => product.price * product.quantity)
+    .map((product) => {
+      const baseTotal = product.price * product.quantity;
+
+      const discountAmount = product.discount
+        ? baseTotal * (product.discount / 100)
+        : 0;
+
+      return baseTotal - discountAmount;
+    })
     .reduce((total, value) => total + value, 0);
 }
 
