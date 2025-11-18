@@ -42,23 +42,40 @@
 
   উদাহরণ: এই উদাহরণে দেখানো হয়েছে TypeScript-এ interface merging কিভাবে কাজ করে। দুইটি Geeks interface স্বয়ংক্রিয়ভাবে একত্রিত হয়ে একটি interface তৈরি করে, যার ফলে gfg অবজেক্টটি name, age এবং email—তিনটি প্রপার্টিই implement করতে পারে এবং merged ফলাফল লগ করতে পারে।
 
-```
+  ```
+  // Creating a interface
+  interface Geeks {
+  name: string;
+  age: number
+  }
 
-```
+  interface Geeks {
+  email: string;
+  }
+
+  // Using the merged interface
+  const gfg: Geeks = {
+  name: "kgowda",
+  age: 20,
+  email: "kgowda@gmail.com"
+  };
+
+  console.log(gfg);
+  ```
 
 ### TypeScript-এ Type এবং Interface-এর পার্থক্য
 
-    | বৈশিষ্ট্য (Feature)                       | Type                                                   | Interface                                   |
-    | ----------------------------------------- | ------------------------------------------------------ | ------------------------------------------- |
-    | **Definition**                            | বিভিন্ন ডেটা টাইপের একটি সংগ্রহ                        | একটি সিন্ট্যাকটিক্যাল চুক্তি                |
-    | **Flexibility**                           | বেশি flexible                                          | type-এর তুলনায় কম flexible                  |
-    | **Keyword**                               | `type` কীওয়ার্ড ব্যবহার করে                            | `interface` কীওয়ার্ড ব্যবহার করে            |
-    | **Naming**                                | নতুন একটি টাইপের নাম তৈরি করতে সাহায্য করে             | entity সংজ্ঞায়িত করার উপায় দেয়           |
-    | **Capabilities**                          | অপেক্ষাকৃত কম ক্ষমতা                                   | অপেক্ষাকৃত বেশি ক্ষমতা                      |
-    | **Object Usage**                          | স্বাভাবিকভাবে object ব্যবহারের জন্য তৈরি নয়            | object ব্যবহারের জন্য তৈরি                  |
-    | **Merged Declarations**                   | একাধিক merged declaration সাপোর্ট করে না               | একাধিক merged declaration সাপোর্ট করে       |
-    | **Name Conflicts**                        | একই নামে দুইটি type থাকলে error দেয়                    | একই নামে দুইটি interface থাকলে merge হয়     |
-    | **Implementation**                        | কোনো implementation-এ ব্যবহৃত হয় না                    | class-এ implement বা extend করতে ব্যবহৃত হয় |
-    | **Union Types**                           | union type implement বা extend করা যায় না              | union type implement বা extend করা যায়      |
-    | **Intersection Types**                    | একাধিক type মিলিয়ে intersection টাইপ তৈরি করা যায়      | intersection interface তৈরি করা যায় না      |
-    | **Usage with Primitives, Unions, Tuples** | primitive, union, tuple—সব ধরনের টাইপে ব্যবহার করা যায় | primitive বা tuple টাইপে ব্যবহার করা যায় না |
+| বৈশিষ্ট্য (Feature)                       | Type                                                   | Interface                                   |
+| ----------------------------------------- | ------------------------------------------------------ | ------------------------------------------- |
+| **Definition**                            | বিভিন্ন ডেটা টাইপের একটি সংগ্রহ                        | একটি সিন্ট্যাকটিক্যাল চুক্তি                |
+| **Flexibility**                           | বেশি flexible                                          | type-এর তুলনায় কম flexible                  |
+| **Keyword**                               | `type` কীওয়ার্ড ব্যবহার করে                            | `interface` কীওয়ার্ড ব্যবহার করে            |
+| **Naming**                                | নতুন একটি টাইপের নাম তৈরি করতে সাহায্য করে             | entity সংজ্ঞায়িত করার উপায় দেয়           |
+| **Capabilities**                          | অপেক্ষাকৃত কম ক্ষমতা                                   | অপেক্ষাকৃত বেশি ক্ষমতা                      |
+| **Object Usage**                          | স্বাভাবিকভাবে object ব্যবহারের জন্য তৈরি নয়            | object ব্যবহারের জন্য তৈরি                  |
+| **Merged Declarations**                   | একাধিক merged declaration সাপোর্ট করে না               | একাধিক merged declaration সাপোর্ট করে       |
+| **Name Conflicts**                        | একই নামে দুইটি type থাকলে error দেয়                    | একই নামে দুইটি interface থাকলে merge হয়     |
+| **Implementation**                        | কোনো implementation-এ ব্যবহৃত হয় না                    | class-এ implement বা extend করতে ব্যবহৃত হয় |
+| **Union Types**                           | union type implement বা extend করা যায় না              | union type implement বা extend করা যায়      |
+| **Intersection Types**                    | একাধিক type মিলিয়ে intersection টাইপ তৈরি করা যায়      | intersection interface তৈরি করা যায় না      |
+| **Usage with Primitives, Unions, Tuples** | primitive, union, tuple—সব ধরনের টাইপে ব্যবহার করা যায় | primitive বা tuple টাইপে ব্যবহার করা যায় না |
