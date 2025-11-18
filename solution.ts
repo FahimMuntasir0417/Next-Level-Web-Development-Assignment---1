@@ -1,5 +1,3 @@
-// * Problem 1
-
 type Value = string | number | boolean;
 function formatValue(value: Value): string | number | boolean {
   if (typeof value === "string") {
@@ -11,12 +9,6 @@ function formatValue(value: Value): string | number | boolean {
   }
 }
 
-// console.log(formatValue("hello"));
-// console.log(formatValue(5));
-// console.log(formatValue(true));
-
-// * Problem 2
-
 function getLength(value: string | any[]): number {
   if (typeof value === "string") {
     return value.length;
@@ -24,12 +16,6 @@ function getLength(value: string | any[]): number {
     return Array.isArray(value) ? value.length : 0;
   }
 }
-
-console.log(getLength("typescript"));
-console.log(getLength([10, 20, 30, 40]));
-console.log(getLength([]));
-
-// *problem 3
 
 class Person {
   name: string;
@@ -43,14 +29,6 @@ class Person {
     return `'Name: ${this.name}, Age: ${this.age}'`;
   }
 }
-
-// const person1 = new Person("John Doe", 30);
-// console.log(person1.getDetails());
-
-// const person2 = new Person("Alice", 25);
-// console.log(person2.getDetails());
-
-// * Problem 4
 
 interface Items {
   title: string;
@@ -66,25 +44,6 @@ const books = [
   { title: "Book B", rating: 3.2 },
   { title: "Book C", rating: 5.0 },
 ];
-
-// console.log(filterByRating(books));
-
-// * Problem 5
-// &
-
-// function filterActiveUsers(
-//   items: { id: number; name: string; email: string; isActive: boolean }[]
-// ): { id: number; name: string; email: string; isActive: boolean }[] {
-//   return items.filter((items) => items.isActive === true);
-// }
-
-// const users = [
-//   { id: 1, name: "Rakib", email: "rakib@example.com", isActive: true },
-//   { id: 2, name: "Asha", email: "asha@example.com", isActive: false },
-//   { id: 3, name: "Rumi", email: "rumi@example.com", isActive: true },
-// ];
-
-// console.log(filterActiveUsers(users));
 
 interface Items1 {
   id: number;
@@ -102,10 +61,6 @@ const users = [
   { id: 2, name: "Asha", email: "asha@example.com", isActive: false },
   { id: 3, name: "Rumi", email: "rumi@example.com", isActive: true },
 ];
-
-// console.log(filterActiveUsers(users));
-
-// * Problem 6
 
 interface Book {
   title: string;
@@ -127,10 +82,6 @@ const myBook: Book = {
   publishedYear: 1925,
   isAvailable: true,
 };
-
-printBookDetails(myBook);
-
-// * Problem 7
 
 function getUniqueValues(
   arr1: (string | number)[],
@@ -162,11 +113,6 @@ function getUniqueValues(
 
 const array1 = [1, 2, 3, 4, 5];
 const array2 = [3, 4, 5, 6, 7];
-console.log(getUniqueValues(array1, array2));
-
-// * Problem 8
-
-// & Done According to OutPut not logic ,will have finished after getting instruction
 
 interface Product {
   name: string;
@@ -196,5 +142,3 @@ const products = [
   { name: "Notebook", price: 25, quantity: 3, discount: 10 },
   { name: "Bag", price: 50, quantity: 1, discount: 20 },
 ];
-
-// console.log(calculateTotalPrice(products));
