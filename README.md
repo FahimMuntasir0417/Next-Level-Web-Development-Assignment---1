@@ -79,3 +79,69 @@
 | **Union Types**                           | union type implement বা extend করা যায় না              | union type implement বা extend করা যায়      |
 | **Intersection Types**                    | একাধিক type মিলিয়ে intersection টাইপ তৈরি করা যায়      | intersection interface তৈরি করা যায় না      |
 | **Usage with Primitives, Unions, Tuples** | primitive, union, tuple—সব ধরনের টাইপে ব্যবহার করা যায় | primitive বা tuple টাইপে ব্যবহার করা যায় না |
+
+## 2. TypeScript-এর any, unknown, এবং never টাইপের পার্থক্য
+
+### Any type :
+
+- any টাইপ মূলত কোনো ভেরিয়েবলের টাইপ-চেকিং বন্ধ করে দেয়।
+- any হিসেবে ঘোষিত একটি ভেরিয়েবল যেকোনো ধরনের মান ধারণ করতে পারে, এবং তার ওপর যেকোনো অপারেশন করা যায়—TypeScript কোনো টাইপ এরর দেবে না।
+- any ব্যবহার করুন তখন, যখন আপনাকে ইচ্ছাকৃতভাবে টাইপ-চেকিং এড়িয়ে যেতে হয়—সাধারণত ডায়নামিক ডেটা, বা এমন পুরানো JavaScript কোডের সাথে কাজ করার সময় যেখানে টাইপ নির্ধারণ করা কঠিন।
+
+```
+let valueAny: any = "hello";
+valueAny = 123; // No error
+valueAny.toFixed(); // No error, even if valueAny is a string
+```
+
+## Unknwn type :
+
+- unknown টাইপ হলো any-এর একটি টাইপ-নিরাপদ বিকল্প।
+- unknown হিসেবে ঘোষিত একটি ভেরিয়েবলও যেকোনো ধরনের মান ধারণ করতে পারে।
+  তবে any-এর মতো ইচ্ছামতো অপারেশন করা যায় না—প্রথমে টাইপ গার্ড বা টাইপ অ্যাসার্শন ব্যবহার করে তার টাইপ নির্ণয় করতে হয়।
+- যখন কোনো মানের টাইপ আপনি জানেন না, কিন্তু ব্যবহার করার আগে টাইপ-নিরাপত্তা নিশ্চিত করতে চান, তখন unknown ব্যবহার করুন।
+
+```
+let valueUnknown: unknown = "hello";
+valueUnknown = 123; // No error
+
+// valueUnknown.toFixed(); // Error: Object is of type 'unknown'.
+if (typeof valueUnknown === 'number') {
+    valueUnknown.toFixed(); // OK, type is narrowed to number
+}
+```
+
+## Nver type :
+
+- never টাইপ এমন মানকে নির্দেশ করে যা কখনোই ঘটবে না।
+- এটি সাধারণত সেই সব ফাংশনের জন্য ব্যবহৃত হয় যেগুলো কখনোই রিটার্ন করে না (যেমন সর্বদা এরর ছোড়ে এমন ফাংশন বা অনন্ত লুপে চলে যাওয়া ফাংশন) অথবা exhaustive টাইপ চেকের সময়, যেখানে সব সম্ভাব্য কেস আগে থেকেই হ্যান্ডেল করা হয়েছে।
+- never হলো অন্যান্য সব টাইপের একটি সাবটাইপ, কিন্তু কোনো টাইপই never-এর সাবটাইপ নয় (never নিজেকে ছাড়া)।
+
+```
+function throwError(message: string): never {
+    throw new Error(message);
+}
+
+function infiniteLoop(): never {
+    while (true) {
+        // ...
+    }
+}
+
+type Shape = 'circle' | 'square';
+function getArea(shape: Shape): number {
+    switch (shape) {
+        case 'circle': return Math.PI;
+        case 'square': return 1;
+        default:
+            const exhaustiveCheck: never = shape; // Ensures all cases are handled
+            throw new Error(`Unhandled shape: ${exhaustiveCheck}`);
+    }
+}
+```
+
+| টাইপ        | যেকোনো মান রাখা যায়? | সরাসরি ব্যবহার করা যায়? | নিরাপত্তা | ব্যবহার ক্ষেত্র       |
+| ----------- | --------------------- | ------------------------ | --------- | --------------------- |
+| **any**     | হ্যাঁ                 | হ্যাঁ (সব অপারেশন)       | কম        | টাইপ-চেক বন্ধ করতে    |
+| **unknown** | হ্যাঁ                 | না (টাইপ চেক দরকার)      | বেশি      | নিরাপদ ডায়নামিক ডেটা |
+| **never**   | না                    | না                       | N/A       | অসম্ভব পরিস্থিতি      |
